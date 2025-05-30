@@ -76,7 +76,7 @@ class Rebuy {
       'authorization': loginData[1],
     };
     Response r =
-        await dio.get("/v2/green/carts", options: Options(headers: headers));
+        await dio.get("/v3/green/carts", options: Options(headers: headers));
 
     if (r.statusCode != 200) {
       uuid = "null";
@@ -94,7 +94,7 @@ class Rebuy {
     Map<String, Map<String, Object>> data = {
       "product": {"id": bookCode},
     };
-    Response r = await dio.post("/v2/green/carts/$uuid/products",
+    Response r = await dio.post("/v3/green/carts/$uuid/products",
         data: data, options: Options(headers: headers));
 
     if (r.statusCode != 200) {
@@ -108,7 +108,7 @@ class Rebuy {
     Map<String, String> headers = {
       'authorization': loginData[1],
     };
-    Response r = await dio.delete("/v2/green/carts/$uuid/products/$bookCode",
+    Response r = await dio.delete("/v3/green/carts/$uuid/products/$bookCode",
         options: Options(headers: headers));
 
     if (r.statusCode != 200) {
@@ -123,7 +123,7 @@ class Rebuy {
       'authorization': loginData[1],
     };
     Response r =
-        await dio.get("/v2/green/carts", options: Options(headers: headers));
+        await dio.get("/v3/green/carts", options: Options(headers: headers));
 
     if (r.statusCode != 200) {
       return [Book.empty()];
@@ -168,7 +168,7 @@ Future<List> checkRebuy(String isbn) async {
   try {
     Response r =
         await Dio(BaseOptions(baseUrl: "https://mobile.rebuy.com")).get(
-      '/v2/green/search/?q=$isbn',
+      '/v3/green/search/?q=$isbn',
       options: Options(headers: headers),
     );
     var rj = r.data;
